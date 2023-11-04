@@ -24,7 +24,7 @@ public class Productor2 extends Thread{
             // Espera un poco antes de añadir más letras
             try
             {
-                sleep( (int)(Math.random() * 100 ) );
+                sleep( 1000 );
             }
             catch( InterruptedException e )
             {

@@ -2,11 +2,13 @@ package seguimiento.tallerhilos_sockets.abecedario;
 
 public class Tuberia {
 
-    private char buffer[] = new char[6];
+    private char buffer[] = new char[15];
     private int siguiente = 0;
     // Flags para saber el estado del buffer
     private boolean estaLlena = false;
     private boolean estaVacia = true;
+
+    private boolean esIgual = false;
 
     // M�todo para retirar letras del buffer
     public synchronized char recoger()
@@ -53,7 +55,7 @@ public class Tuberia {
         // Cambia al siguiente lugar disponible
         siguiente++;
         // Comprueba si el buffer est� lleno
-        if( siguiente == 6 )
+        if( siguiente == 15 )
             estaLlena = true;
         estaVacia = false;
         notify();
