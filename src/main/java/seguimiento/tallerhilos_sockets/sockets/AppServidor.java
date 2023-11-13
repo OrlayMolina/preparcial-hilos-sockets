@@ -1,18 +1,23 @@
 package seguimiento.tallerhilos_sockets.sockets;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class AppServidor {
 
+
     String host = "localhost";
     int puerto = 8081;
     ServerSocket server;
 
+    int numero = 46685545;
     Socket socketComunicacion;
-    ObjectOutputStream flujoSalidaObjeto;
+
+    DataOutputStream flujoSalida;
+    DataInputStream flujoEntrada;
+    BufferedReader entrada;
+
     String mensajeCliente;
 
     public AppServidor() {
@@ -23,14 +28,21 @@ public class AppServidor {
 
         try {
             server = new ServerSocket(puerto);
+            while(true)
+            {
+                System.out.println("Esperando al cliente");
+                socketComunicacion = server.accept();
 
-            System.out.println("Esperando cliente");
-            socketComunicacion = server.accept();
+                flujoSalida = new DataOutputStream(socketComunicacion.getOutputStream());
+                flujoEntrada = new DataInputStream(socketComunicacion.getInputStream());
 
-            flujoSalidaObjeto = new ObjectOutputStream(socketComunicacion.getOutputStream());
+                enviarDatosPrimitivos();
 
-            flujoSalidaObjeto.close();
-            socketComunicacion.close();
+
+                flujoEntrada.close();
+                flujoSalida.close();
+                socketComunicacion.close();
+            }
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -39,4 +51,27 @@ public class AppServidor {
 
 
     }
+
+
+    private void enviarDatosPrimitivos() throws IOException {
+
+        int entero = calcularCifras(numero);
+
+        flujoSalida.writeInt(entero);
+        System.out.println("Enviando entero:"+ entero);
+
+        flujoSalida.writeUTF("Enviando hola");
+        System.out.println("Se envio hola");
+    }
+
+    private static int calcularCifras(int n) {
+
+        if(n < 10){
+            return 1;
+        }else {
+            n = n/10;
+            return calcularCifras(n)+1;
+        }
+    }
+
 }
