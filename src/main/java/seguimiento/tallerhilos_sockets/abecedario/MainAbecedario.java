@@ -1,6 +1,9 @@
 package seguimiento.tallerhilos_sockets.abecedario;
 
+import java.util.ArrayList;
+
 public class MainAbecedario {
+    static ArrayList<Character> letrasRecogidas = new ArrayList<>();
 
     public static void main(String[] args) {
         Tuberia t = new Tuberia();
@@ -11,4 +14,20 @@ public class MainAbecedario {
         p2.start();
         c.start();
     }
+
+
+
+    public boolean buscarElemento(ArrayList<Character> letrasRecogidas, int inicial, int fin, int numeroBuscado) {
+
+        if(inicial > fin){
+            return true;
+        }else {
+            if(letrasRecogidas.get(inicial) == numeroBuscado){
+                return false;
+            }else {
+                return buscarElemento(letrasRecogidas, inicial+1, fin, numeroBuscado);
+            }
+        }
+    }
+
 }

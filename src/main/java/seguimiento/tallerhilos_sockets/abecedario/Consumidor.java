@@ -6,25 +6,24 @@ public class Consumidor extends Thread{
 
     private Tuberia tuberia;
 
-
-
     public Consumidor( Tuberia t )
     {
         // Mantiene una copia propia del objeto compartido
         tuberia = t;
     }
 
-    @Override
     public void run() {
         char c;
 
-        // Consume 15 letras de la tuber�a
-        for( int i=0; i < 15; i=i+2 )
+        // Consume 10 letras de la tuber�a
+        for( int i=0; i < 13; i++ )
         {
             c = tuberia.recoger();
-            // Imprime las letras retiradas
             System.out.println( "Recogido el caracter "+c );
-            // Espera un poco antes de coger m�s letras
+
+            c = tuberia.recoger();
+            System.out.println( "Recogido el caracter "+c );
+
             try
             {
                 sleep( 3000 );
@@ -35,6 +34,4 @@ public class Consumidor extends Thread{
             }
         }
     }
-
-
 }

@@ -1,7 +1,5 @@
 package seguimiento.tallerhilos_sockets.abecedario;
 
-import java.util.ArrayList;
-
 public class Tuberia {
 
     private char buffer[] = new char[15];
@@ -10,13 +8,9 @@ public class Tuberia {
     private boolean estaLlena = false;
     private boolean estaVacia = true;
 
-    private ArrayList<Character> letrasConsumidas = new ArrayList<Character>();
-
-
     // M�todo para retirar letras del buffer
     public synchronized char recoger()
     {
-
         // No se puede consumir si el buffer est� vac�o
         while( estaVacia == true )
         {
@@ -45,7 +39,6 @@ public class Tuberia {
     // M�todo para a�adir letras al buffer
     public synchronized void lanzar( char c )
     {
-
         // Espera hasta que haya sitio para otra letra
         while( estaLlena == true )
         {
@@ -64,13 +57,5 @@ public class Tuberia {
             estaLlena = true;
         estaVacia = false;
         notify();
-    }
-
-    public ArrayList<Character> getLetrasConsumidas() {
-        return letrasConsumidas;
-    }
-
-    public void setLetrasConsumidas(ArrayList<Character> letrasConsumidas) {
-        this.letrasConsumidas = letrasConsumidas;
     }
 }
