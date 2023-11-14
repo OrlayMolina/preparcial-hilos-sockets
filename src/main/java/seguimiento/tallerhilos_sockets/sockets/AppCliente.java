@@ -15,6 +15,9 @@ public class AppCliente {
     DataOutputStream flujoSalida;
     DataInputStream flujoEntrada;
 
+    DataOutputStream flujoSalidaDos;
+    DataInputStream flujoEntradaDos;
+
 
     public AppCliente(String host, int puerto) {
         this.puerto = puerto;
@@ -49,6 +52,7 @@ public class AppCliente {
 
 
     private void recibirDatosPrimitivos() throws IOException {
+        String palabra = String.valueOf(flujoEntradaDos.read());
 
         System.out.println("Datos recibidos del servidor: "+flujoEntrada.readInt());
         System.out.println("Datos recibidos del servidor: "+flujoEntrada.readUTF());
