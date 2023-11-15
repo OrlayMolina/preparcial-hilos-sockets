@@ -53,8 +53,10 @@ public class Tuberia {
         // Cambia al siguiente lugar disponible
         siguiente++;
         // Comprueba si el buffer est� lleno
-        if( siguiente == 15 )
+        if( siguiente == 15 ){
             estaLlena = true;
+            System.out.println("Tuberia llena... esperando a que el consumidor recoja más letras");
+        }
         estaVacia = false;
         notify();
     }

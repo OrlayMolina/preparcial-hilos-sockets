@@ -35,7 +35,7 @@ public class Productor1 extends Thread{
             }
 
             try {
-                sleep(1500);
+                sleep(10);
             } catch (InterruptedException e) {
                 System.out.println(e);
             }
