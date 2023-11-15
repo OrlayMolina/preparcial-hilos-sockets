@@ -15,7 +15,7 @@ public class Consumidor extends Thread{
     public void run() {
         char c;
 
-        // Consume 10 letras de la tuber�a
+        // Consume 26 letras de la tuber�a
         for( int i=0; i < 13; i++ )
         {
             c = tuberia.recoger();

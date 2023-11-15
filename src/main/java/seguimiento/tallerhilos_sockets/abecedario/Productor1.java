@@ -18,22 +18,28 @@ public class Productor1 extends Thread{
         char c;
 
         // Mete 10 letras en la tubería
-        for( int i=0; i < 13; i++ )
-        {
-            c = alfabeto.charAt( (int)(Math.random()*26 ) );
-            if(main.buscarElemento(letrasRecogidas, 0, letrasRecogidas.size()-1, c)){
-                letrasRecogidas.add(c);
-                tuberia.lanzar( c );
-                System.out.println( "Producto1 ha Lanzado "+c+" a la tuberia." );
+        for (int i = 0; i < 13; i++) {
+            c = alfabeto.charAt((int) (Math.random() * 26));
+
+            boolean elementoAgregado = false; // Variable para verificar si se agregó el elemento
+
+            while (!elementoAgregado) {
+                if (main.buscarElemento(letrasRecogidas, 0, letrasRecogidas.size() - 1, c)) {
+                    letrasRecogidas.add(c);
+                    tuberia.lanzar(c);
+                    System.out.println("Producto1 ha Lanzado " + c + " a la tuberia.");
+                    elementoAgregado = true; // Se establece como verdadero una vez que se agregó el elemento
+                } else {
+                    c = alfabeto.charAt((int) (Math.random() * 26)); // Generar un nuevo carácter si el anterior ya estaba en la lista
+                }
             }
-            try
-            {
-                sleep( 1500 );
-            }
-            catch( InterruptedException e )
-            {
+
+            try {
+                sleep(1500);
+            } catch (InterruptedException e) {
                 System.out.println(e);
             }
         }
+
     }
 }
