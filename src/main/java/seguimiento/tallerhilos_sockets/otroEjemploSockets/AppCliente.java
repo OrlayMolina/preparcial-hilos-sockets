@@ -9,7 +9,7 @@ public class AppCliente {
 
     String host;
     int puerto;
-    Socket socketComunicador=new Socket();
+    Socket socketComunicador = new Socket();
     DataInputStream entradaCifras;
     DataInputStream entradaCadena;
     DataOutputStream salidaCifras;
@@ -20,16 +20,24 @@ public class AppCliente {
         this.puerto = puerto;
     }
 
-    public void iniciarcliente() throws IOException {
+    public void iniciarCliente() throws IOException {
+
+        try {
+            crearConexion();
+
+        }catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
     }
 
-    private void recibirObjeto() throws IOException {
+    private void recibirDatos() throws IOException {
 
     }
 
-    private void mandarObjeto() throws IOException {
-        
+    private void mandarDatos() throws IOException {
+
     }
 
     public void crearConexion() throws IOException {
