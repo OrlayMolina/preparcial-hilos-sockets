@@ -5,72 +5,77 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class AppServidor {
+    // el servidor no necesita el localhots pero si o si el puerto
+    int puerto=8081;
+    ServerSocket serverSocket;
+    Socket socketComunicador;
+    DataInputStream flujoEntradaDos;
+    DataInputStream flujoEntradaUno;
+    DataOutputStream flujoSalidaUno;
+    DataOutputStream flujSalidaDos;
+    String palabra;
+    int numero;
+
+    int respuestaDigitoUno;
+    int respuestaDigitoDos;
+
+    public void iniciarServidor() throws IOException {
+        System.out.println("Esperando cliente");
+        serverSocket=new ServerSocket(puerto);//ser crea el serve
+
+        socketComunicador=serverSocket.accept();// espera para recibir el cliente
+        flujoEntradaUno=new DataInputStream(socketComunicador.getInputStream());
+        flujoEntradaDos=new DataInputStream(socketComunicador.getInputStream());
+        flujoSalidaUno=new DataOutputStream(socketComunicador.getOutputStream());
+        flujSalidaDos=new DataOutputStream(socketComunicador.getOutputStream());
+        recibir();
+
+        respuestaDigitoUno=contarVocales(palabra,0,0);
+        respuestaDigitoDos=contarCifras(numero,0);
+
+        mandar();
+        flujoSalidaUno.close();
+        flujSalidaDos.close();
+        flujoEntradaUno.close();
+        flujoEntradaDos.close();
+        socketComunicador.close();
 
 
-    String host = "localhost";
-    int puerto = 8081;
-    ServerSocket server;
-
-    int numero = 46685545;
-    Socket socketComunicacion;
-
-    DataOutputStream flujoSalida;
-    DataInputStream flujoEntrada;
-    BufferedReader entrada;
 
 
-    public AppServidor() {
-        // TODO Auto-generated constructor stub
     }
 
-    public void iniciarServidor() {
+    private void mandar() throws IOException {
+        flujoSalidaUno.write(respuestaDigitoUno);
+        flujSalidaDos.write(respuestaDigitoDos);
+        System.out.println("mandado numero vocales servidor "+respuestaDigitoUno);
+        System.out.println("mandado numero de digitos servidor "+respuestaDigitoDos);
+    }
 
-        try {
-            server = new ServerSocket(puerto);
-            while(true)
-            {
-                System.out.println("Esperando al cliente");
-                socketComunicacion = server.accept();
+    private void recibir() throws IOException {
+        palabra=flujoEntradaUno.readUTF();
+        numero= flujoEntradaDos.readInt();
+        System.out.println("recibio palabra servidor "+palabra);
+        System.out.println("recibo numero servidior "+numero);
 
-                flujoSalida = new DataOutputStream(socketComunicacion.getOutputStream());
-                flujoEntrada = new DataInputStream(socketComunicacion.getInputStream());
-
-                enviarDatosPrimitivos();
-
-                flujoEntrada.close();
-                flujoSalida.close();
-                socketComunicacion.close();
-            }
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+    }
+    public int contarVocales(String palabra, int indice,int contador){
+        if(indice>=palabra.length()){
+            return contador;
         }
-
-
-    }
-
-
-    private void enviarDatosPrimitivos() throws IOException {
-
-        int entero = calcularCifras(numero);
-
-        flujoSalida.writeInt(entero);
-        System.out.println("Enviando entero:"+ entero);
-
-        flujoSalida.writeUTF("Enviando hola");
-        System.out.println("Se envio hola");
-    }
-
-    private static int calcularCifras(int n) {
-
-        if(n < 10){
-            return 1;
-        }else {
-            n = n/10;
-            return calcularCifras(n)+1;
+        if(String.valueOf(palabra.charAt(indice)).equals("a") || String.valueOf(palabra.charAt(indice)).equals("e") ||
+                String.valueOf(palabra.charAt(indice)).equals("i") || String.valueOf(palabra.charAt(indice)).equals("o")
+                || String.valueOf(palabra.charAt(indice)).equals("u")){
+            contador=contador+1;
+            contarVocales(palabra,indice+1,contador);
         }
+        return contarVocales(palabra,indice+1,contador);
     }
 
-
+    public int contarCifras(int numero,int contador){
+        if(numero<1){
+            return contador;
+        }
+        return contarCifras(numero/10,contador+1);
+    }
 }

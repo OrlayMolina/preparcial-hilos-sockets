@@ -1,10 +1,10 @@
 package seguimiento.tallerhilos_sockets.sockets;
 
+import java.io.IOException;
+
 public class MainServidor {
 
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
+    public static void main(String[] args) throws IOException {
         AppServidor appServidor = new AppServidor();
         appServidor.iniciarServidor();
     }

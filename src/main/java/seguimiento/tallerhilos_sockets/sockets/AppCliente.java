@@ -7,58 +7,54 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 
 public class AppCliente {
-
-
     String host;
     int puerto;
-    Socket socketComunicacion;
-    DataOutputStream flujoSalida;
-    DataInputStream flujoEntrada;
+    Socket socketComunicador=new Socket();
+    DataInputStream flujoEntradaUno;//flujo de entrada;              //cuando se va a mandar palabras o numeros se usa DataInputStream
+    DataInputStream flujoEntradaDos;// flujo de entrada;             // cuando se va a mandar objeto se usa ObjectInput
+    DataOutputStream flujoSalidaUno; //flujo de salida
+    DataOutputStream flujoSalidaDos;//flujo de salida
 
     public AppCliente(String host, int puerto) {
-        this.puerto = puerto;
         this.host = host;
+        this.puerto = puerto;
     }
+    public void iniciarcliente() throws IOException {
+        crearConexio();
+        flujoEntradaDos =new DataInputStream(socketComunicador.getInputStream());
+        flujoEntradaUno =new DataInputStream(socketComunicador.getInputStream());
+        flujoSalidaUno =new DataOutputStream(socketComunicador.getOutputStream());
+        flujoSalidaDos =new DataOutputStream(socketComunicador.getOutputStream());
+        mandarObjeto();
+
+        recibirObjeto();
+
+        flujoEntradaUno.close();
+        flujoEntradaDos.close();
+        flujoSalidaUno.close();
+        flujoSalidaDos.close();
+        socketComunicador.close();
 
 
 
-    public void iniciarCliente() {
-
-
-        try {
-            crearConexion();
-
-            flujoEntrada = new DataInputStream(socketComunicacion.getInputStream());
-            flujoSalida = new DataOutputStream(socketComunicacion.getOutputStream());
-
-            recibirDatosPrimitivos();
-
-
-            flujoEntrada.close();
-            flujoSalida.close();
-            socketComunicacion.close();
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 
     }
 
-
-
-    private void recibirDatosPrimitivos() throws IOException {
-        System.out.println("Datos recibidos del servidor: "+flujoEntrada.readInt());
-        System.out.println("Datos recibidos del servidor: "+flujoEntrada.readUTF());
+    private void recibirObjeto() throws IOException {
+        String palabraUno=String.valueOf(flujoEntradaUno.read());
+        String palabraDos= String.valueOf(flujoEntradaDos.read());
+        System.out.println(" Recibir Numero vocales cliente "+palabraUno);
+        System.out.println(" Recibir Numero de cifras cliente "+palabraDos);
     }
 
-
-
-    private void crearConexion() throws IOException {
-        socketComunicacion = new Socket(host, puerto);
+    private void mandarObjeto() throws IOException {
+        flujoSalidaUno.writeUTF("hola");
+        flujoSalidaDos.writeInt(5486);
+        System.out.println("Mandar palabra cliente manda hola");
+        System.out.println("Mandar numero cliente mandado 5486");
     }
 
-
-
-
+    public void crearConexio() throws IOException {
+        socketComunicador=new Socket(host,puerto);
+    }
 }
