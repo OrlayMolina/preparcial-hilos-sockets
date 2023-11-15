@@ -1,11 +1,9 @@
 package seguimiento.tallerhilos_sockets.puntoParcialSockets;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class AppServidor {
 
@@ -69,5 +67,13 @@ public class AppServidor {
         String mensajeRecibido = recibirDatosPrimitivos();
         flujoSalida.writeUTF("Cadena de texto recibida exitosamente! y guardada en el archivo Estudiante.txt");
         flujoSalida.writeUTF("Cadena recibida: " + mensajeRecibido);
+    }
+
+    public void guardarDatos(String ruta, String contenido, boolean b) throws IOException {
+        FileWriter fw = new FileWriter(ruta, b);
+        BufferedWriter bfw = new BufferedWriter(fw);
+        bfw.write(contenido);
+        bfw.close();
+        fw.close();
     }
 }
