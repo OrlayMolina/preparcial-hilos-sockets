@@ -24,9 +24,10 @@ public class AppServidor {
 
     static int vocales = 0;
     static int consonantes = 0;
-
     static String cadenaCliente;
     static String respuestaCadenaServidor;
+
+    static int numero;
 
     public AppServidor() {
         // TODO Auto-generated constructor stub
@@ -38,19 +39,23 @@ public class AppServidor {
             server = new ServerSocket(puerto);
             while(true) {
 
-                System.out.println("Esperando al cliente");
+                System.out.println("Esperando al cliente\n");
                 socketComunicacion = server.accept();
+
+                salidaCifras = new DataOutputStream(socketComunicacion.getOutputStream());
+                entradaCifras = new DataInputStream(socketComunicacion.getInputStream());
 
                 salidaCadena = new DataOutputStream(socketComunicacion.getOutputStream());
                 entradaCadena = new DataInputStream(socketComunicacion.getInputStream());
 
-                System.out.print("La palabra recibida del cliente: ");
                 recibirDatos();
-                System.out.println("Enviando respuesta de vocales y consonantes al cliente");
+
                 mandarDatos();
 
                 entradaCadena.close();
                 salidaCadena.close();
+                entradaCifras.close();
+                salidaCifras.close();
                 socketComunicacion.close();
 
             }
@@ -63,11 +68,21 @@ public class AppServidor {
     }
 
     private void recibirDatos() throws IOException {
+
+        numero = entradaCifras.readInt();
+        System.out.println("Número que envió el cliente: " + numero);
+
         cadenaCliente = entradaCadena.readUTF();
-        System.out.println(cadenaCliente);
+        System.out.println("Palabra que envió el cliente: " + cadenaCliente +"\n");
+        System.out.println("Generando resultados...\n");
     }
 
     private void mandarDatos() throws IOException {
+
+        int cifras = calcularCifras(numero);
+        salidaCifras.writeInt(cifras);
+        System.out.println("Enviando el número de cifras del número recibido: "+ cifras);
+        System.out.println("Enviando respuesta de vocales y consonantes al cliente... \n");
         salidaCadena.writeUTF(respuestaCadena());
     }
 

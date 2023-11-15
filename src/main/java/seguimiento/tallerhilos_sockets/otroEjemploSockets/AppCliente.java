@@ -25,16 +25,22 @@ public class AppCliente {
         try {
             crearConexion();
 
+            //Ejercicio a, contar las cifras de un número
+            entradaCifras = new DataInputStream(socketComunicador.getInputStream());
+            salidaCifras = new DataOutputStream(socketComunicador.getOutputStream());
+
+            //Ejercicio b, contar vocales y consonantes de una cadena
             entradaCadena = new DataInputStream(socketComunicador.getInputStream());
             salidaCadena = new DataOutputStream(socketComunicador.getOutputStream());
 
             mandarDatos();
-            System.out.println("Enviando datos al servidor");
-            recibirDatos();
 
+            recibirDatos();
 
             entradaCadena.close();
             salidaCadena.close();
+            entradaCifras.close();
+            salidaCifras.close();
             socketComunicador.close();
 
         }catch (IOException e) {
@@ -45,11 +51,15 @@ public class AppCliente {
     }
 
     private void mandarDatos() throws IOException {
+        System.out.println("Enviado número al servidor...");
+        salidaCifras.writeInt(54886);
+        System.out.println("Enviando cadena al servidor...\n");
         salidaCadena.writeUTF("Gerontologia");
     }
 
     private void recibirDatos() throws IOException {
-        System.out.println("Datos recibidos del servidor: "+entradaCadena.readUTF());
+        System.out.println("Datos recibidos del servidor, número de cifras del número enviado: "+entradaCifras.readInt());
+        System.out.println("Datos recibidos del servidor, cantidad de vocales y consonantes de la cadena enviada: "+entradaCadena.readUTF());
     }
 
     public void crearConexion() throws IOException {
