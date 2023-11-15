@@ -62,4 +62,6 @@ public class AppCliente {
     private void crearConexion() throws IOException {
         socketComunicacion = new Socket(host, puerto);
     }
+
+
 }

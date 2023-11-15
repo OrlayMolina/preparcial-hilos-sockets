@@ -72,7 +72,7 @@ public class AppServidor {
     public void guardarDatos(String ruta, String contenido, boolean b) throws IOException {
         FileWriter fw = new FileWriter(ruta, b);
         BufferedWriter bfw = new BufferedWriter(fw);
-        bfw.write(contenido);
+        bfw.write(contenido+"\n");
         bfw.close();
         fw.close();
     }

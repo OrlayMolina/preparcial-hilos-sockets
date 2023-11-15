@@ -9,6 +9,6 @@ public class MainServidor {
 
         AppServidor appServidor = new AppServidor();
         appServidor.iniciarServidor();
-        appServidor.guardarDatos(AppServidor.RUTA_ARCHIVO_ESTUDIANTES,appServidor.mensajeCliente, false);
+        appServidor.guardarDatos(AppServidor.RUTA_ARCHIVO_ESTUDIANTES,appServidor.mensajeCliente, true);
     }
 }
