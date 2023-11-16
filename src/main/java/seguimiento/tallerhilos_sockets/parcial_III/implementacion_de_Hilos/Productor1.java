@@ -3,7 +3,6 @@ package seguimiento.tallerhilos_sockets.parcial_III.implementacion_de_Hilos;
 import java.util.ArrayList;
 
 public class Productor1 extends Thread{
-
     Main main = new Main();
     private Buffer buffer;
     private String arreglo;
