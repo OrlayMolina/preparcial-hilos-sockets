@@ -11,6 +11,13 @@ public class Vehiculo {
 
     }
 
+    public Vehiculo(String documentoPropietario, TipoVehiculo tipoVehiculo, Double cantidadGalones, String fechaTanqueo) {
+        this.documentoPropietario = documentoPropietario;
+        this.tipoVehiculo = tipoVehiculo;
+        this.cantidadGalones = cantidadGalones;
+        this.fechaTanqueo = fechaTanqueo;
+    }
+
     public String getDocumentoPropietario() {
         return documentoPropietario;
     }
