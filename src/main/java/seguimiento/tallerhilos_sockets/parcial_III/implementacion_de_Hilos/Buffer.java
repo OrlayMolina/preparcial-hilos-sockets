@@ -27,7 +27,6 @@ public class Buffer {
         return( buffer[siguiente] );
     }
 
-
     public synchronized void lanzar( char c )
     {
         while( estaLlena == true )

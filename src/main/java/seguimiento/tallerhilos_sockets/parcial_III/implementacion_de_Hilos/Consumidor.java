@@ -16,16 +16,22 @@ public class Consumidor extends Thread{
         this.letrasDesechadas = letrasDesechadas;
     }
 
+    /**
+     * Se crea una lista char llamada result con la longitud de la palabra deseada universid@d#2023%
+     */
     @Override
     public void run() {
+
         char[] result = new char[this.palabra.length()];
         ArrayList<Integer> posicionesUtilizadas = new ArrayList<>();
 
-        int caracteresConsumidos = 0; // Contador para llevar el seguimiento de los caracteres consumidos en cada iteración
+        // Contador para llevar el seguimiento de los caracteres consumidos en cada iteración
+        int caracteresConsumidos = 0;
 
         while (this.arregloLleno(result)) {
-            char letra1 = this.buffer.recoger(); // Recoger el primer carácter
-            char letra2 = this.buffer.recoger(); // Recoger el segundo carácter
+            //Se recogen dos char en cada ciclo
+            char letra1 = this.buffer.recoger();
+            char letra2 = this.buffer.recoger();
 
             boolean letra1Encontrada = false;
             boolean letra2Encontrada = false;
@@ -62,7 +68,8 @@ public class Consumidor extends Thread{
                 }
             }
 
-            caracteresConsumidos = 0; // Reiniciar el contador para la siguiente iteración
+            // Reiniciar el contador para la siguiente iteración
+            caracteresConsumidos = 0;
 
             try {
                 Thread.sleep(500);

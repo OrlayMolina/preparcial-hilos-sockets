@@ -7,7 +7,6 @@ public class AppCliente {
 
     String host;
     int puerto;
-
     String infoVehiculo;
     Socket socketComunicador = new Socket();
     DataInputStream entradaRespuesta;
@@ -47,11 +46,9 @@ public class AppCliente {
         salidaInfo.writeUTF(infoVehiculo);
     }
 
-
     private void recibirDatosRespuesta() throws IOException {
         System.out.println("Respuesta del servidor: " + entradaRespuesta.readUTF());
     }
-
 
     public void crearConexion() throws IOException {
         socketComunicador=new Socket(host,puerto);

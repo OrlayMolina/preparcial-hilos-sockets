@@ -13,7 +13,6 @@ public class AppServidor {
     Socket socketComunicacion;
     static DataOutputStream respuestaGenerada;
     DataInputStream infoCliente;
-
     String mensajeCliente;
 
     public AppServidor(int puerto) {

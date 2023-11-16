@@ -31,6 +31,14 @@ public class Main {
         }
     }
 
+    /**
+     * Método que se utilizará para que la lista de chars no usados no duplique chars
+     * @param letrasRecogidas
+     * @param inicial
+     * @param fin
+     * @param numeroBuscado
+     * @return
+     */
     public boolean buscarElemento(ArrayList<Character> letrasRecogidas, int inicial, int fin, int numeroBuscado) {
 
         if(inicial > fin){
