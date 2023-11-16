@@ -6,7 +6,7 @@ public class Productor3 extends Thread{
     Main main = new Main();
     private Buffer buffer;
     private String arreglo;
-    private ArrayList<Character> numeroNoUsado = new ArrayList<>();
+    private final ArrayList<Character> numeroNoUsado;
 
     public Productor3(Buffer buffer, String arreglo, ArrayList<Character> numeroNoUsado) {
         this.buffer = buffer;
@@ -40,11 +40,11 @@ public class Productor3 extends Thread{
         }
     }
 
-    public static boolean determinarNumero(char letra){
+    public static boolean determinarNumero(char numero){
 
-        if(letra == '0' || letra == '1' || letra == '2' || letra == '3' ||
-                letra == '4' || letra == '5' || letra == '6' || letra == '7' ||
-                letra == '8' || letra == '9'){
+        if(numero == '0' || numero == '1' || numero == '2' || numero == '3' ||
+                numero == '4' || numero == '5' || numero == '6' || numero == '7' ||
+                numero == '8' || numero == '9'){
             return true;
         }else{
             return false;

@@ -6,7 +6,7 @@ public class Productor4 extends Thread{
     Main main = new Main();
     private Buffer buffer;
     private String arreglo;
-    private ArrayList<Character> caracterNoUsado = new ArrayList<>();
+    private final ArrayList<Character> caracterNoUsado;
 
     public Productor4(Buffer buffer, String arreglo, ArrayList<Character> caracterNoUsado) {
         this.buffer = buffer;
