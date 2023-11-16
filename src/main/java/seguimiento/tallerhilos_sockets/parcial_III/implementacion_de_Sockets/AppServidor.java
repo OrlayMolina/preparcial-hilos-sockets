@@ -14,6 +14,8 @@ public class AppServidor {
     static DataOutputStream respuestaGenerada;
     DataInputStream infoCliente;
 
+    String mensajeCliente;
+
     public AppServidor(int puerto) {
 
     }
@@ -28,6 +30,8 @@ public class AppServidor {
 
                 respuestaGenerada = new DataOutputStream(socketComunicacion.getOutputStream());
                 infoCliente = new DataInputStream(socketComunicacion.getInputStream());
+
+                recibirDatos();
 
                 enviarRespuesta();
 
@@ -44,9 +48,15 @@ public class AppServidor {
 
     }
 
+    private void recibirDatos() throws IOException {
+        mensajeCliente = infoCliente.readUTF();
+        System.out.println("Mensaje recibido del cliente: " + mensajeCliente); // Agregamos esta línea para imprimir el mensaje recibido
+        guardarDatos(RUTA_ARCHIVO_TANQUEO, mensajeCliente,true);
+    }
+
     private static void enviarRespuesta() throws IOException {
 
-        respuestaGenerada.writeUTF("información recibida exitosamente!,se ha guardadao en el archivo tanqueo.txt");
+        respuestaGenerada.writeUTF("Información recibida exitosamente!, se ha guardado en el archivo tanqueo.txt");
 
     }
 

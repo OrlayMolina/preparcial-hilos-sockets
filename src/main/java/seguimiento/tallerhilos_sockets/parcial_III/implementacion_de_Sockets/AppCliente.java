@@ -26,11 +26,11 @@ public class AppCliente {
             entradaRespuesta = new DataInputStream(socketComunicador.getInputStream());
             salidaInfo = new DataOutputStream(socketComunicador.getOutputStream());
 
+            System.out.println("Enviando datos al servidor");
+            enviarDatos();
+
             System.out.println("Recibiendo respuesta del servidor...\n");
             recibirDatosRespuesta();
-
-            System.out.println("Enviando datos al servidor");
-
 
             entradaRespuesta.close();
             salidaInfo.close();
@@ -41,6 +41,12 @@ public class AppCliente {
             e.printStackTrace();
         }
     }
+
+    private void enviarDatos() throws IOException {
+
+        salidaInfo.writeUTF(infoVehiculo);
+    }
+
 
     private void recibirDatosRespuesta() throws IOException {
         System.out.println("Respuesta del servidor: " + entradaRespuesta.readUTF());
