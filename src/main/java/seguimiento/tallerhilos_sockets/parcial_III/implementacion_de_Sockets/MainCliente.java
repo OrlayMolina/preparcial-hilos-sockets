@@ -13,11 +13,11 @@ public class MainCliente {
                 "97856415"
         };
 
-        TipoVehiculo[] tipoVehiculos = {
-                TipoVehiculo.automóvil,
-                TipoVehiculo.motocicleta,
-                TipoVehiculo.camioneta,
-                TipoVehiculo.motocicleta
+        String[] tipoVehiculos = {
+                "automóvil",
+                "motocicleta",
+                "camioneta",
+                "motocicleta"
         };
 
         Double[] cantidadGalones = {4.5, 4.8, 3.7, 4.2};
@@ -30,13 +30,10 @@ public class MainCliente {
         };
 
         for(int i = 0; i<numerosPropietarios.length;i++){
-            Vehiculo infoVehiculos = new Vehiculo(
-                    numerosPropietarios[i],
-                    tipoVehiculos[i],
-                    cantidadGalones[i],
-                    fechas[i]
-            );
-            AppCliente appCliente = new AppCliente("localhost",8081, infoVehiculos);
+
+            String info = numerosPropietarios[i]+";"+ tipoVehiculos[i]+";" +cantidadGalones[i]+";" +fechas[i];
+
+            AppCliente appCliente = new AppCliente("localhost",8081, info);
             System.out.println("Iniciando cliente\n");
             appCliente.iniciarCliente();
         }
