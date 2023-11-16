@@ -1,6 +1,5 @@
 package seguimiento.tallerhilos_sockets.otroEjemploSockets;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -42,9 +41,11 @@ public class AppServidor {
                 System.out.println("Esperando al cliente\n");
                 socketComunicacion = server.accept();
 
+                //Ejercicio a, contar las cifras de un número
                 salidaCifras = new DataOutputStream(socketComunicacion.getOutputStream());
                 entradaCifras = new DataInputStream(socketComunicacion.getInputStream());
 
+                //Ejercicio b, contar vocales y consonantes de una cadena
                 salidaCadena = new DataOutputStream(socketComunicacion.getOutputStream());
                 entradaCadena = new DataInputStream(socketComunicacion.getInputStream());
 
@@ -106,17 +107,17 @@ public class AppServidor {
     }
 
     public static int contarVocales(String palabra, int indice, int contador){
-        if(indice>=palabra.length()){
+        if(indice >= palabra.length()){
             return contador;
         }
-        if(String.valueOf(palabra.charAt(indice)).equals("a") || String.valueOf(palabra.charAt(indice)).equals("e") ||
-                String.valueOf(palabra.charAt(indice)).equals("i") || String.valueOf(palabra.charAt(indice)).equals("o")
-                || String.valueOf(palabra.charAt(indice)).equals("u")){
-            contador=contador+1;
-            contarVocales(palabra,indice+1,contador);
+        char letra = Character.toLowerCase(palabra.charAt(indice));
+
+        if(letra == 'a' || letra == 'e' || letra == 'i' || letra == 'o' || letra == 'u'){
+            contador++;
         }
-        return contarVocales(palabra,indice+1,contador);
+        return contarVocales(palabra, indice + 1, contador);
     }
+
 
     public static int contarConsonantes(String cadena) {
         if (cadena.equals("")) {
