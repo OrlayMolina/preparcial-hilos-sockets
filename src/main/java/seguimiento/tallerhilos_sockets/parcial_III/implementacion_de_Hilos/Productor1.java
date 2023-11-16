@@ -24,7 +24,7 @@ public class Productor1 extends Thread{
             c = arreglo.charAt( (int)(Math.random()*44 ) );
             if(determinarVocales(c)){
                 buffer.lanzar( c );
-                System.out.println( "Lanzado "+c+" al buffer." );
+                System.out.println( "Lanzada la vocal "+c+" al buffer" );
             }else {
                 if(main.buscarElemento(vocalNoUsada, 0, vocalNoUsada.size()-1, c)){
                     vocalNoUsada.add(c);

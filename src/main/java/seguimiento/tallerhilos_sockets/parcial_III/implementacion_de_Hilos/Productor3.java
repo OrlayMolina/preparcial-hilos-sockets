@@ -22,7 +22,7 @@ public class Productor3 extends Thread{
             c = arreglo.charAt( (int)(Math.random()*44 ) );
             if(determinarNumero(c)){
                 buffer.lanzar( c );
-                System.out.println( "Lanzado "+c+" al buffer." );
+                System.out.println( "Lanzado el número "+c+" al buffer" );
             }else {
                 if(main.buscarElemento(numeroNoUsado, 0, numeroNoUsado.size()-1, c)){
                     numeroNoUsado.add(c);

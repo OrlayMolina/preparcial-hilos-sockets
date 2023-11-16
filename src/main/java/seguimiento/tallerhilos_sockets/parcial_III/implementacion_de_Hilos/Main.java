@@ -11,6 +11,14 @@ public class Main {
         Productor1 p1 = new Productor1(buffer, cadena, listaPalabrasNoUsadas);
         Productor2 p2 = new Productor2(buffer, cadena, listaPalabrasNoUsadas);
         Productor3 p3 = new Productor3(buffer, cadena, listaPalabrasNoUsadas);
+        Productor4 p4 = new Productor4(buffer, cadena, listaPalabrasNoUsadas);
+        Consumidor consumidor = new Consumidor(buffer, "universid@d#2023%",500);
+
+        p1.start();
+        p2.start();
+        p3.start();
+        p4.start();
+        consumidor.start();
     }
 
     public boolean buscarElemento(ArrayList<Character> letrasRecogidas, int inicial, int fin, int numeroBuscado) {

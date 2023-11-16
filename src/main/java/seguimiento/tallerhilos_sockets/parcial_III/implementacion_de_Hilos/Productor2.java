@@ -24,7 +24,7 @@ public class Productor2 extends Thread{
             c = arreglo.charAt( (int)(Math.random()*44 ) );
             if(determinarConsonantes(c)){
                 buffer.lanzar( c );
-                System.out.println( "Lanzado "+c+" al buffer." );
+                System.out.println( "Lanzada la consonante "+c+" al buffer" );
             }else {
                 if(main.buscarElemento(consonanteNoUsada, 0, consonanteNoUsada.size()-1, c)){
                     consonanteNoUsada.add(c);
