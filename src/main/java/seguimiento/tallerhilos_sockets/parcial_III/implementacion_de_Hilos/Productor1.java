@@ -19,7 +19,7 @@ public class Productor1 extends Thread{
 
         char c;
 
-        for( int i=0; i < 10; i++ )
+        while(true)
         {
             c = arreglo.charAt( (int)(Math.random()*44 ) );
             if(determinarVocales(c)){

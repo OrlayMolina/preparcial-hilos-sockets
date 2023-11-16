@@ -19,7 +19,7 @@ public class Productor2 extends Thread{
 
         char c;
 
-        for( int i=0; i < 10; i++ )
+        while(true)
         {
             c = arreglo.charAt( (int)(Math.random()*44 ) );
             if(determinarConsonantes(c)){
@@ -33,7 +33,7 @@ public class Productor2 extends Thread{
 
             try
             {
-                sleep( 100  );
+                sleep( 150 );
             }
             catch( InterruptedException e )
             {
